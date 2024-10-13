@@ -1,38 +1,36 @@
-const os = require('os');
+import { homedir } from "os";
 
-const homeDir = os.homedir();
+const homeDir = homedir();
 let currentDir = homeDir;
 
-// Function to display the current working directory
 function displayCurrentDirectory() {
-    console.log(`You are currently in ${currentDir}`);
+  console.log(`You are currently in ${currentDir}`);
 }
 
 function handleUnknownCommand() {
-    console.log('Invalid input. Please try again.');
+  console.log("Invalid input. Please try again.");
 }
-
 
 function handleCommand(command) {
-    const [cmd, ...args] = command.trim().split(' ');
+  const [cmd, ...args] = command.trim().split(" ");
 
-    switch (cmd) {
-        case '.exit':
-            console.log(`Thank you for using File Manager, ${username}, goodbye!`);
-            process.exit();
-        default:
-            handleUnknownCommand();
-            break;
-    }
+  switch (cmd) {
+    case ".exit":
+      console.log(`Thank you for using File Manager, ${username}, goodbye!`);
+      process.exit();
+    default:
+      handleUnknownCommand();
+      break;
+  }
 }
 
-
-
-const username = process.argv.find(arg => arg.startsWith('--username=')).split('=')[1];
+const username = process.argv
+  .find((arg) => arg.startsWith("--username="))
+  .split("=")[1];
 
 console.log(`Welcome to the File Manager, ${username}!`);
 
-process.stdin.on('data', (input) => {
-    handleCommand(input.toString());
-    displayCurrentDirectory();
+process.stdin.on("data", (input) => {
+  handleCommand(input.toString());
+  displayCurrentDirectory();
 });
