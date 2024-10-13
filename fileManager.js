@@ -1,5 +1,6 @@
 import { homedir } from "os";
-import { dirname } from "path";
+import { dirname, join } from "path";
+import { readdirSync, statSync } from "fs";
 
 const homeDir = homedir();
 let currentDir = homeDir;
@@ -25,6 +26,28 @@ function changeDirectoryUp() {
   displayCurrentDirectory();
 }
 
+function listDirectory() {
+  const files = readdirSync(currentDir);
+  const fileDetails = files.map((file) => {
+    const filePath = join(currentDir, file);
+    const type = statSync(filePath).isDirectory() ? "directory" : "file";
+    return {
+      Name: file,
+      Type: type,
+    };
+  });
+
+  const sortedFiles = fileDetails.sort((a, b) => {
+    return a.Type === b.Type
+      ? a.Name.localeCompare(b.Name)
+      : a.Type === "directory"
+      ? -1
+      : 1;
+  });
+
+  console.table(sortedFiles);
+}
+
 function handleCommand(command) {
   const [cmd, ...args] = command.trim().split(" ");
 
@@ -33,6 +56,9 @@ function handleCommand(command) {
       exit();
     case "up":
       changeDirectoryUp();
+      break;
+    case "ls":
+      listDirectory();
       break;
     default:
       handleUnknownCommand();
