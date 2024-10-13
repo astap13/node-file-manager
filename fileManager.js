@@ -5,6 +5,7 @@ import { readFile } from "./src/readFile.js";
 import { handleUnknownCommand } from "./src/utils/handleUnknownCommand.js";
 import { displayCurrentDirectory } from "./src/utils/displayCurrentDirectory.js";
 import { createFile } from "./src/createFile.js";
+import { renameFile } from "./src/renameFile.js";
 
 function handleCommand(command) {
   const [cmd, ...args] = command.trim().split(" ");
@@ -23,6 +24,9 @@ function handleCommand(command) {
       break;
     case "add":
       createFile(args[0]);
+      break;
+    case "rn":
+      renameFile(args[0], args[1]);
       break;
     default:
       handleUnknownCommand();
