@@ -9,6 +9,7 @@ import { renameFile } from "./src/renameFile.js";
 import { deleteFile } from "./src/deleteFile.js";
 import { copyFile } from "./src/copyFile.js";
 import { moveFile } from "./src/moveFile.js";
+import { hashFile } from "./src/hashFile.js";
 
 function handleCommand(command) {
   const [cmd, ...args] = command.trim().split(" ");
@@ -39,6 +40,9 @@ function handleCommand(command) {
       break;
     case "mv":
       moveFile(args[0], args[1]);
+      break;
+    case "hash":
+      hashFile(args[0]);
       break;
     default:
       handleUnknownCommand();
