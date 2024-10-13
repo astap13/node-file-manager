@@ -12,6 +12,7 @@ import { moveFile } from "./src/moveFile.js";
 import { hashFile } from "./src/hashFile.js";
 import { compressFile } from "./src/compressFile.js";
 import { decompressFile } from "./src/decompressFile.js";
+import { changeDirectory } from "./src/changeDirectory.js";
 
 function handleCommand(command) {
   const [cmd, ...args] = command.trim().split(" ");
@@ -21,6 +22,9 @@ function handleCommand(command) {
       exit(username);
     case "up":
       changeDirectoryUp();
+      break;
+    case "cd":
+      changeDirectory(args[0]);
       break;
     case "ls":
       listDirectory();
