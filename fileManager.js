@@ -7,6 +7,7 @@ import { displayCurrentDirectory } from "./src/utils/displayCurrentDirectory.js"
 import { createFile } from "./src/createFile.js";
 import { renameFile } from "./src/renameFile.js";
 import { deleteFile } from "./src/deleteFile.js";
+import { copyFile } from "./src/copyFile.js";
 
 function handleCommand(command) {
   const [cmd, ...args] = command.trim().split(" ");
@@ -31,6 +32,9 @@ function handleCommand(command) {
       break;
     case "rm":
       deleteFile(args[0]);
+      break;
+    case "cp":
+      copyFile(args[0], args[1]);
       break;
     default:
       handleUnknownCommand();
