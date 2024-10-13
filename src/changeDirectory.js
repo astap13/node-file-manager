@@ -13,13 +13,17 @@ export function changeDirectory(newDir) {
 
   const newPath = isAbsolute(newDir) ? newDir : join(currentDir, newDir);
 
-  if (existsSync(newPath)) {
-    if (statSync(newPath).isDirectory()) {
-      changeCurrentDirectory(newPath);
-    } else {
-      console.log("Operation failed: path exists but is not a directory.");
-    }
-  } else {
-    console.log("Operation failed: directory does not exist.");
+  if (!existsSync(newPath)) {
+    console.log(`Operation failed: directory "${newPath}" does not exist.`);
+    return;
   }
+
+  if (!statSync(newPath).isDirectory()) {
+    console.log(
+      `Operation failed: path "${newPath}" exists but is not a directory.`
+    );
+    return;
+  }
+
+  changeCurrentDirectory(newPath);
 }
