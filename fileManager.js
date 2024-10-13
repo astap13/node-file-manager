@@ -1,4 +1,5 @@
 import { homedir } from "os";
+import { dirname } from "path";
 
 const homeDir = homedir();
 let currentDir = homeDir;
@@ -15,12 +16,24 @@ function exit() {
   console.log(`Thank you for using File Manager, ${username}, goodbye!`);
   process.exit();
 }
+
+function changeDirectoryUp() {
+  const parentDir = dirname(currentDir);
+  if (parentDir !== currentDir) {
+    currentDir = parentDir;
+  }
+  displayCurrentDirectory();
+}
+
 function handleCommand(command) {
   const [cmd, ...args] = command.trim().split(" ");
 
   switch (cmd) {
     case ".exit":
       exit();
+    case "up":
+      changeDirectoryUp();
+      break;
     default:
       handleUnknownCommand();
       break;
