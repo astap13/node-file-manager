@@ -76,3 +76,8 @@ process.stdin.on("data", (input) => {
   handleCommand(input.toString());
   displayCurrentDirectory();
 });
+
+process.on('SIGINT', () => {
+  console.log(`\nThank you for using File Manager, ${username}, goodbye!`);
+  process.exit();
+});
