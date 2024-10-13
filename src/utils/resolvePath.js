@@ -1,6 +1,6 @@
 import { join, basename, isAbsolute } from "path";
 import { existsSync, statSync } from "fs";
-import { currentDir } from "./utils/displayCurrentDirectory.js";
+import { currentDir } from "./displayCurrentDirectory.js";
 
 export function resolvePaths(sourcePath, destinationPath) {
   if (!sourcePath || !destinationPath) {
