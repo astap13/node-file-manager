@@ -8,6 +8,7 @@ import { createFile } from "./src/createFile.js";
 import { renameFile } from "./src/renameFile.js";
 import { deleteFile } from "./src/deleteFile.js";
 import { copyFile } from "./src/copyFile.js";
+import { moveFile } from "./src/moveFile.js";
 
 function handleCommand(command) {
   const [cmd, ...args] = command.trim().split(" ");
@@ -35,6 +36,9 @@ function handleCommand(command) {
       break;
     case "cp":
       copyFile(args[0], args[1]);
+      break;
+    case "mv":
+      moveFile(args[0], args[1]);
       break;
     default:
       handleUnknownCommand();
