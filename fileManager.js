@@ -10,6 +10,7 @@ import { deleteFile } from "./src/deleteFile.js";
 import { copyFile } from "./src/copyFile.js";
 import { moveFile } from "./src/moveFile.js";
 import { hashFile } from "./src/hashFile.js";
+import { compressFile } from "./src/compressFile.js";
 
 function handleCommand(command) {
   const [cmd, ...args] = command.trim().split(" ");
@@ -43,6 +44,9 @@ function handleCommand(command) {
       break;
     case "hash":
       hashFile(args[0]);
+      break;
+    case "compress":
+      compressFile(args[0], args[1]);
       break;
     default:
       handleUnknownCommand();
