@@ -6,6 +6,7 @@ import { handleUnknownCommand } from "./src/utils/handleUnknownCommand.js";
 import { displayCurrentDirectory } from "./src/utils/displayCurrentDirectory.js";
 import { createFile } from "./src/createFile.js";
 import { renameFile } from "./src/renameFile.js";
+import { deleteFile } from "./src/deleteFile.js";
 
 function handleCommand(command) {
   const [cmd, ...args] = command.trim().split(" ");
@@ -27,6 +28,9 @@ function handleCommand(command) {
       break;
     case "rn":
       renameFile(args[0], args[1]);
+      break;
+    case "rm":
+      deleteFile(args[0]);
       break;
     default:
       handleUnknownCommand();
