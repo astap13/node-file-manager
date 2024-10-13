@@ -1,4 +1,4 @@
-import { exit } from "./src/exit.js";
+import { exit } from "./src/utils/exit.js";
 import { changeDirectoryUp } from "./src/changeDirectoryUp.js";
 import { listDirectory } from "./src/listDirectory.js";
 import { readFile } from "./src/readFile.js";
