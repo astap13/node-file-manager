@@ -13,6 +13,7 @@ import { hashFile } from "./src/hashFile.js";
 import { compressFile } from "./src/compressFile.js";
 import { decompressFile } from "./src/decompressFile.js";
 import { changeDirectory } from "./src/changeDirectory.js";
+import { handleOSCommands } from "./src/handleOS.js";
 
 function handleCommand(command) {
   const [cmd, ...args] = command.trim().split(" ");
@@ -55,6 +56,9 @@ function handleCommand(command) {
       break;
     case "decompress":
       decompressFile(args[0], args[1]);
+      break;
+    case "os":
+      handleOSCommands(args);
       break;
     default:
       handleUnknownCommand();

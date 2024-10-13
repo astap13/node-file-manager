@@ -1,7 +1,6 @@
 import { join, isAbsolute } from "path";
 import { existsSync, statSync } from "fs";
 import { currentDir } from "./utils/displayCurrentDirectory.js";
-import { displayCurrentDirectory } from "./utils/displayCurrentDirectory.js";
 import { changeCurrentDirectory } from "./utils/displayCurrentDirectory.js";
 
 export function changeDirectory(newDir) {
