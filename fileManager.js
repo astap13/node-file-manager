@@ -1,64 +1,24 @@
-import { homedir } from "os";
-import { dirname, join } from "path";
-import { readdirSync, statSync } from "fs";
-
-const homeDir = homedir();
-let currentDir = homeDir;
-
-function displayCurrentDirectory() {
-  console.log(`You are currently in ${currentDir}`);
-}
-
-function handleUnknownCommand() {
-  console.log("Invalid input. Please try again.");
-}
-
-function exit() {
-  console.log(`Thank you for using File Manager, ${username}, goodbye!`);
-  process.exit();
-}
-
-function changeDirectoryUp() {
-  const parentDir = dirname(currentDir);
-  if (parentDir !== currentDir) {
-    currentDir = parentDir;
-  }
-  displayCurrentDirectory();
-}
-
-function listDirectory() {
-  const files = readdirSync(currentDir);
-  const fileDetails = files.map((file) => {
-    const filePath = join(currentDir, file);
-    const type = statSync(filePath).isDirectory() ? "directory" : "file";
-    return {
-      Name: file,
-      Type: type,
-    };
-  });
-
-  const sortedFiles = fileDetails.sort((a, b) => {
-    return a.Type === b.Type
-      ? a.Name.localeCompare(b.Name)
-      : a.Type === "directory"
-      ? -1
-      : 1;
-  });
-
-  console.table(sortedFiles);
-}
+import { exit } from "./src/exit.js";
+import { changeDirectoryUp } from "./src/changeDirectoryUp.js";
+import { listDirectory } from "./src/listDirectory.js";
+import { readFile } from "./src/readFile.js";
+import { handleUnknownCommand } from "./src/utils/handleUnknownCommand.js";
+import { displayCurrentDirectory } from "./src/utils/displayCurrentDirectory.js";
 
 function handleCommand(command) {
   const [cmd, ...args] = command.trim().split(" ");
 
   switch (cmd) {
     case ".exit":
-      exit();
+      exit(username);
     case "up":
       changeDirectoryUp();
       break;
     case "ls":
       listDirectory();
+      break;
+    case "cat":
+      readFile(args[0]);
       break;
     default:
       handleUnknownCommand();
