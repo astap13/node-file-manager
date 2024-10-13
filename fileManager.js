@@ -71,13 +71,14 @@ const username = process.argv
   .split("=")[1];
 
 console.log(`Welcome to the File Manager, ${username}!`);
+displayCurrentDirectory();
 
 process.stdin.on("data", (input) => {
   handleCommand(input.toString());
   displayCurrentDirectory();
 });
 
-process.on('SIGINT', () => {
+process.on("SIGINT", () => {
   console.log(`\nThank you for using File Manager, ${username}, goodbye!`);
   process.exit();
 });
