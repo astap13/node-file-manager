@@ -1,4 +1,5 @@
 import { EOL, cpus as getCpus, homedir, userInfo, arch } from "os";
+import { handleUnknownCommand } from "./utils/handleUnknownCommand.js";
 
 export function handleOSCommands(args) {
   switch (args[0]) {
