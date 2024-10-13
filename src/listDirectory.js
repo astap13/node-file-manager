@@ -3,6 +3,7 @@ import { join } from "path";
 import { statSync, readdirSync } from "fs";
 
 export function listDirectory() {
+  try {
     const files = readdirSync(currentDir);
     const fileDetails = files.map((file) => {
       const filePath = join(currentDir, file);
@@ -12,7 +13,7 @@ export function listDirectory() {
         Type: type,
       };
     });
-  
+
     const sortedFiles = fileDetails.sort((a, b) => {
       return a.Type === b.Type
         ? a.Name.localeCompare(b.Name)
@@ -20,6 +21,11 @@ export function listDirectory() {
         ? -1
         : 1;
     });
-  
+
     console.table(sortedFiles);
+  } catch (err) {
+    console.error(
+      `Operation failed: cannot list directory "${currentDir}". Error: ${err.message}`
+    );
   }
+}
